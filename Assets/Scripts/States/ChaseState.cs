@@ -20,16 +20,24 @@ public class ChaseState : StatesSO
 
     public override void OnStateUpdate(AEnemyBehaviour ec)
     {
-        //follow target position
-        //if target is left of enemy, ,invert sprite
-        if (ec.target.transform.position.x < ec.transform.position.x)
+        if (ec.target.GetComponent<PlayerMovement>().alive == true)
         {
-            ec.transform.localScale = new Vector3(-1, 1, 1);
+            //follow target position
+            //if target is left of enemy, ,invert sprite
+            if (ec.target.transform.position.x < ec.transform.position.x)
+            {
+                ec.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                ec.transform.localScale = new Vector3(1, 1, 1);
+            }
+            ec.rb.velocity = (ec.target.transform.position - ec.transform.position).normalized * ec.speed;
         }
         else
         {
-            ec.transform.localScale = new Vector3(1, 1, 1);
+            ec.GoToState<IdleState>();
+            ec._animator.SetBool("Follow", false);
         }
-        ec.rb.velocity = (ec.target.transform.position - ec.transform.position).normalized * ec.speed;
     }
 }

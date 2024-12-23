@@ -17,19 +17,26 @@ public class AttackState : StatesSO
 
     public override void OnStateUpdate(AEnemyBehaviour ec)
     {
-        //rotate turret to face target
-        Vector2 direction = ec.target.transform.position - ec.transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        ec.rb.rotation = angle-90;
-        //shoot
-        if (ec.timeBetweenShots <= 0)
+        if (ec.target.GetComponent<PlayerMovement>().alive==true)
         {
-            ec.timeBetweenShots = 1f;
-            ec.Shoot();
+            //rotate turret to face target
+            Vector2 direction = ec.target.transform.position - ec.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            ec.rb.rotation = angle - 90;
+            //shoot
+            if (ec.timeBetweenShots <= 0)
+            {
+                ec.timeBetweenShots = 1f;
+                ec.Shoot();
+            }
+            else
+            {
+                ec.timeBetweenShots -= Time.deltaTime;
+            }
         }
         else
         {
-            ec.timeBetweenShots -= Time.deltaTime;
+            ec.GoToState<IdleState>();
         }
     }
 }

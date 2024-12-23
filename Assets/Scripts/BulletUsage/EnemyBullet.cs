@@ -8,6 +8,7 @@ public class EnemyBullet : ABullet
     private Camera mainCam;
     public Transform transformObj;
     public EnemyTurret spawner;
+    public int damage = 1;
     void Start()
     {
     }
@@ -35,11 +36,12 @@ public class EnemyBullet : ABullet
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Finish" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player")
         {
             if (collision.gameObject.tag == "Player")
             {
-                collision.gameObject.GetComponent<PlayerMovement>().HP -= 1;
+                collision.gameObject.GetComponent<PlayerMovement>().HP -= damage;
+                collision.gameObject.GetComponent<PlayerMovement>().CheckIfAlive();
             }
             Debug.Log(WeaponManager.instance.bullets);
             spawner.Push(gameObject);

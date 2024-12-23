@@ -504,7 +504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  HP: 100
+  HP: 3
+  alive: 1
+  weaponManager: {fileID: 0}
 --- !u!50 &971225242
 Rigidbody2D:
   serializedVersion: 4
@@ -678,9 +680,9 @@ GameObject:
   - component: {fileID: 1188413553}
   - component: {fileID: 1188413552}
   - component: {fileID: 1188413551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
-  m_TagString: Finish
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1107,6 +1109,7 @@ MonoBehaviour:
   rb: {fileID: 1575733846}
   timeBetweenShots: 0
   _animator: {fileID: 1575733852}
+  damage: 1
 --- !u!95 &1575733852
 Animator:
   serializedVersion: 5
@@ -1279,6 +1282,7 @@ MonoBehaviour:
   target: {fileID: 971225240}
   rb: {fileID: 1934057474}
   timeBetweenShots: 0
+  _animator: {fileID: 0}
   bulletPrefab: {fileID: 2197821960941414651, guid: bea434a633bea9a44a602d221a5e8fcf, type: 3}
   bulletTransform: {fileID: 1934057472}
 --- !u!50 &1934057474
@@ -1320,7 +1324,7 @@ GameObject:
   - component: {fileID: 1987260709}
   m_Layer: 0
   m_Name: RotatePoint
-  m_TagString: Untagged
+  m_TagString: WeaponManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1362,9 +1366,11 @@ MonoBehaviour:
   timer: 0
   timeBetweenShots: 1
   weaponHolded: 1
+  activeParticleSistem: {fileID: 0}
   Orbe: {fileID: 21300000, guid: 221934815aee75a4294565f28bccd561, type: 3}
   Espada: {fileID: -1516934036, guid: aedf56905c137f043819f32982b16e74, type: 3}
   OrbeFuego: {fileID: 21300000, guid: 7288eef75e2bfaf438d9885f47e0aa35, type: 3}
+  player: {fileID: 0}
   spawnPoint: {fileID: 64410965}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

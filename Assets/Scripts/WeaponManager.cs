@@ -19,12 +19,13 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
     public float timeBetweenShots;
     private Inputs _i;
     public int weaponHolded = 1;
-    private GameObject activeParticleSistem;
+    public GameObject activeParticleSistem;
     private GameObject bullet;
     private Animator weaponAnimator;
     public Sprite Orbe;
     public Sprite Espada;
     public Sprite OrbeFuego;
+    public GameObject player;
     //spawner
     public static WeaponManager instance;
     public Stack<GameObject> bullets;
@@ -37,6 +38,7 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
     }
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         instance = this;
         bullets = new Stack<GameObject>();
         _i = new Inputs();
@@ -55,18 +57,22 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
     // Update is called once per frame
     void Update()
     {
-        spawnPoint = GameObject.FindGameObjectWithTag("Spawnpoint");
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 rotation = mousePos - transform.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
-        if (!canShoot)
+        //mira si player esta vivo
+        if (player.GetComponent<PlayerMovement>().alive == true)
         {
-            timer += Time.deltaTime;
-            if (timer >= timeBetweenShots)
+            spawnPoint = GameObject.FindGameObjectWithTag("Spawnpoint");
+            mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 rotation = mousePos - transform.position;
+            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
+            if (!canShoot)
             {
-                canShoot = true;
-                timer = 0;
+                timer += Time.deltaTime;
+                if (timer >= timeBetweenShots)
+                {
+                    canShoot = true;
+                    timer = 0;
+                }
             }
         }
     }
@@ -89,7 +95,7 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (canShoot)
+        if (canShoot && player.GetComponent<PlayerMovement>().alive == true)
         {
             if (weaponHolded == 1)
             {

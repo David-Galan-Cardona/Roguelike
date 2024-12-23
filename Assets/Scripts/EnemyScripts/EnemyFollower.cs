@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyFollow : AEnemyBehaviour
 {
     private ChaseBehaviour _chaseB;
-    public Animator _animator;
+    public int damage = 1;
     private void Start()
     {
         
@@ -33,6 +33,8 @@ public class EnemyFollow : AEnemyBehaviour
             GoToState<DieState>();
             _animator.SetBool("Boom", true);
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            collision.gameObject.GetComponent<PlayerMovement>().HP -= damage;
+            collision.gameObject.GetComponent<PlayerMovement>().CheckIfAlive();
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

@@ -26,9 +26,8 @@ public class BulletScript : ABullet
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Finish" || collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Enemy")
         {
-            Debug.Log(WeaponManager.instance.bullets);
             WeaponManager.instance.Push(gameObject);
             Debug.Log("Bullet destroyed");
         }

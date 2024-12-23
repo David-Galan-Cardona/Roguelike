@@ -15,3 +15,4 @@ MonoBehaviour:
   StatesToGo:
   - {fileID: 11400000, guid: 81d625829e594e64c87bad149f4403c7, type: 2}
   - {fileID: 11400000, guid: 28614f47a7bb86b4c8da0c916e6008e2, type: 2}
+  - {fileID: 11400000, guid: 06c14cb78b41c0948a5533b2bc843ca3, type: 2}

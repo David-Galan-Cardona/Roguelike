@@ -12,8 +12,12 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     private Animator playerAnimator;
     private Inputs _i;
     public int HP = 5;
+    public bool alive = true;
+    public WeaponManager weaponManager;
     private void Awake()
     {
+        //busca el gameobject con el tag weaponmanager
+        weaponManager = GameObject.FindGameObjectWithTag("WeaponManager").GetComponent<WeaponManager>();
         _i = new Inputs();
         _i.Player.SetCallbacks(this);
     }
@@ -28,18 +32,46 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
 
     void Update()
     {
-        playerAnimator.SetFloat("Horizontal", moveInput.x);
-        playerAnimator.SetFloat("Vertical", moveInput.y);
-        playerAnimator.SetFloat("speed", moveInput.sqrMagnitude);
+        if (alive == true)
+        {
+            playerAnimator.SetFloat("Horizontal", moveInput.x);
+            playerAnimator.SetFloat("Vertical", moveInput.y);
+            playerAnimator.SetFloat("speed", moveInput.sqrMagnitude);
+        }
+        
     }
     private void FixedUpdate()
     {
-        playerRB.MovePosition(playerRB.position + moveInput * speed * Time.fixedDeltaTime);
+        if (alive == true)
+        {
+            playerRB.MovePosition(playerRB.position + moveInput * speed * Time.fixedDeltaTime);
+        }
     }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        if (alive == true)
+        {
+            moveInput = context.ReadValue<Vector2>();
+        }
+    }
+    public void CheckIfAlive()
+    {
+        if (HP <= 0)
+        {
+            playerAnimator.SetBool("IsDying", true);
+            alive = false;
+            if (weaponManager.activeParticleSistem != null)
+            {
+                Destroy(weaponManager.activeParticleSistem.gameObject);
+            }
+        }
+    }
+
+    //espera a que la animacion de muerte termine para poner isdyin en false
+    public void Die()
+    {
+        playerAnimator.SetBool("IsDying", false);
     }
 
     void Start()

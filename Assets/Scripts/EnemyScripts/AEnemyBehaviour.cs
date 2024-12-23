@@ -13,6 +13,7 @@ public abstract class AEnemyBehaviour : MonoBehaviour
     public GameObject target;
     public Rigidbody2D rb;
     public float timeBetweenShots;
+    public Animator _animator;
 
 
     void Start()
