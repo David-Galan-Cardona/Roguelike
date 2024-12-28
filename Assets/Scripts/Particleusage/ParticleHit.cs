@@ -15,13 +15,19 @@ public class ParticleHit : MonoBehaviour
                 Debug.Log("Enemy hit");
                 if (other.gameObject.GetComponent<EnemyFollow>() != null)
                 {
-                    other.gameObject.GetComponent<EnemyFollow>().HP -= damage;
-                    other.gameObject.GetComponent<EnemyFollow>().CheckIfAlife();
+                    if (!(other.gameObject.GetComponent<EnemyFollow>().CurrentState is DieState))
+                    {
+                        other.gameObject.GetComponent<EnemyFollow>().HP -= damage;
+                        other.gameObject.GetComponent<EnemyFollow>().CheckIfAlife();
+                    }
                 }
                 else
                 {
-                    other.gameObject.GetComponent<EnemyTurret>().HP -= damage;
-                    other.gameObject.GetComponent<EnemyTurret>().CheckIfAlife();
+                    if (!(other.gameObject.GetComponent<EnemyTurret>().CurrentState is DieState))
+                    {
+                        other.gameObject.GetComponent<EnemyTurret>().HP -= damage;
+                        other.gameObject.GetComponent<EnemyTurret>().CheckIfAlife();
+                    }
                 }
             }
         }

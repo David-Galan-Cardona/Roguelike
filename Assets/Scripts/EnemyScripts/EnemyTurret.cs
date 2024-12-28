@@ -8,6 +8,7 @@ public class EnemyTurret : AEnemyBehaviour
     public GameObject bulletPrefab;
     public Transform bulletTransform;
     public Stack<GameObject> bullets;
+    public Enemy_DoorScript _enemyDoorScript;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class EnemyTurret : AEnemyBehaviour
         if (HP < 1)
         {
             GoToState<DieState>();
+            _enemyDoorScript = GetComponent<Enemy_DoorScript>();
+            _enemyDoorScript.EnemyDefeated();
         }
     }
     private void Update()

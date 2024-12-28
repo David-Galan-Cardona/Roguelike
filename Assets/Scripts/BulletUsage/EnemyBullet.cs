@@ -41,11 +41,13 @@ public class EnemyBullet : ABullet
             if (collision.gameObject.tag == "Player")
             {
                 collision.gameObject.GetComponent<PlayerMovement>().HP -= damage;
+                spawner.Push(gameObject);
                 collision.gameObject.GetComponent<PlayerMovement>().CheckIfAlive();
             }
-            Debug.Log(WeaponManager.instance.bullets);
-            spawner.Push(gameObject);
-            Debug.Log("Bullet destroyed");
+            else
+            {
+                spawner.Push(gameObject);
+            }
         }
         
     }
