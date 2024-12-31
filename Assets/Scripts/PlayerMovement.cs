@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     private Vector2 moveInput;
     private Animator playerAnimator;
     private Inputs _i;
-    public int HP = 5;
+    public int HP = 10;
+    public int money = 0;
     public bool alive = true;
     public WeaponManager weaponManager;
     private void Awake()

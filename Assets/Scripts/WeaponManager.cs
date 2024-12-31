@@ -26,6 +26,10 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
     public Sprite Espada;
     public Sprite OrbeFuego;
     public GameObject player;
+    //weapon levels
+    public int swordLevel = 1;
+    public int orbLevel = 1;
+    public int flamethrowerLevel = 1;
     //spawner
     public static WeaponManager instance;
     public Stack<GameObject> bullets;
@@ -54,10 +58,8 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
         _i.Disable();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //mira si player esta vivo
         if (player.GetComponent<PlayerMovement>().alive == true)
         {
             spawnPoint = GameObject.FindGameObjectWithTag("Spawnpoint");
@@ -100,9 +102,8 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
             if (weaponHolded == 1)
             {
                 canShoot = false;
-                //activa el collider de la espada
+                Weapon.GetComponent<WeaponDamageScript>().damage = 1 * swordLevel;
                 Weapon.GetComponent<PolygonCollider2D>().enabled = true;
-                //haz la animacion de weapon
                 weaponAnimator = Weapon.GetComponent<Animator>();
                 weaponAnimator.SetTrigger("Melee");
                 StartCoroutine(wait());
@@ -110,7 +111,6 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
             else if (weaponHolded == 2)
             {
                 canShoot = false;
-                //Instantiate(bulletPrefab, bulletTransform.position, Quaternion.identity);
                 if (bullets.Count > 0)
                 {
                     Pop();
@@ -118,7 +118,7 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
                 else
                 {
                     bullet = Instantiate(bulletPrefab, bulletTransform.position, Quaternion.identity);
-                    bullet.GetComponent<WeaponDamageScript>().damage = 1;
+                    bullet.GetComponent<WeaponDamageScript>().damage = 1*orbLevel;
                     bullet.GetComponent<WeaponDamageScript>().knockback = false;
                 }
             }
@@ -130,7 +130,7 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
                     activeParticleSistem = Instantiate(flamethrowerPrefab, bulletTransform.position, Quaternion.identity);
                     activeParticleSistem.transform.parent = bulletTransform;
                     activeParticleSistem.transform.localScale = new Vector3(1, 1, 1);
-                    activeParticleSistem.GetComponent<ParticleHit>().damage = 0.1f;
+                    activeParticleSistem.GetComponent<ParticleHit>().damage = 0.1f*flamethrowerLevel;
                 }
             }
         }
@@ -175,39 +175,51 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
 
     public void OnSwitchWeapon2(InputAction.CallbackContext context)
     {
-        if (weaponHolded == 3)
+        if (orbLevel != 0)
         {
-            if (activeParticleSistem != null)
+            if (weaponHolded == 3)
             {
-                Destroy(activeParticleSistem);
+                if (activeParticleSistem != null)
+                {
+                    Destroy(activeParticleSistem);
+                }
             }
+            if (weaponHolded != 2)
+            {
+                weaponHolded = 2;
+                Weapon.GetComponent<SpriteRenderer>().sprite = Orbe;
+                weaponAnimator.SetInteger("WeaponAnimated", 2);
+            }
+            timeBetweenShots = 0.5f;
         }
-        if (weaponHolded != 2)
-        {
-            weaponHolded = 2;
-            Weapon.GetComponent<SpriteRenderer>().sprite = Orbe;
-            weaponAnimator.SetInteger("WeaponAnimated", 2);
-        }
-        timeBetweenShots = 0.5f;
-        
-            
     }
 
     public void OnSwitchWeapon3(InputAction.CallbackContext context)
     {
-        if (weaponHolded != 3)
+        if (flamethrowerLevel != 0)
         {
-            weaponHolded = 3;
-            Weapon.GetComponent<SpriteRenderer>().sprite = OrbeFuego;
-            weaponAnimator.SetInteger("WeaponAnimated", 3);
+            if (weaponHolded != 3)
+            {
+                weaponHolded = 3;
+                Weapon.GetComponent<SpriteRenderer>().sprite = OrbeFuego;
+                weaponAnimator.SetInteger("WeaponAnimated", 3);
+            }
         }
-        
-
     }
 
     public void OnSwitchWeapon4(InputAction.CallbackContext context)
     {
-        if (weaponHolded == 3)
+        //no hay weapon 4, pero si se añade se puede usar este metodo
+        if (flamethrowerLevel != 0)
+        {
+            if (weaponHolded != 3)
+            {
+                weaponHolded = 3;
+                Weapon.GetComponent<SpriteRenderer>().sprite = OrbeFuego;
+                weaponAnimator.SetInteger("WeaponAnimated", 3);
+            }
+        }
+        /*if (weaponHolded == 3)
         {
             if (activeParticleSistem != null)
             {
@@ -219,6 +231,6 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
             weaponHolded = 4;
             Weapon.GetComponent<SpriteRenderer>().sprite = Orbe;
             weaponAnimator.SetInteger("WeaponAnimated", 4);
-        }
+        }*/
     }
 }

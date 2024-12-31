@@ -514,7 +514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  HP: 100
+  HP: 10
+  money: 0
   alive: 1
   weaponManager: {fileID: 0}
 --- !u!50 &971225242
@@ -737,6 +738,9 @@ MonoBehaviour:
   Espada: {fileID: -1516934036, guid: aedf56905c137f043819f32982b16e74, type: 3}
   OrbeFuego: {fileID: 21300000, guid: 7288eef75e2bfaf438d9885f47e0aa35, type: 3}
   player: {fileID: 0}
+  swordLevel: 1
+  orbLevel: 1
+  flamethrowerLevel: 1
   spawnPoint: {fileID: 64410965}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

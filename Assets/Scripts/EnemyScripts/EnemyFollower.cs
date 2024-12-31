@@ -61,9 +61,9 @@ public class EnemyFollow : AEnemyBehaviour
             GoToState<DieState>();
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             _animator.SetBool("Boom", true);
-            //get enemydoorscript and call enemydefeated
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().money += 1;
         }
     }
     private void Update()

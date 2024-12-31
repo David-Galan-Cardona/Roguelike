@@ -44,6 +44,7 @@ public class EnemyTurret : AEnemyBehaviour
             GoToState<DieState>();
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().money += 1;
         }
     }
     private void Update()
