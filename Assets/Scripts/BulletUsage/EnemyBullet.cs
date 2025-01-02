@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyBullet : ABullet
 {
     private Vector3 target;
-    private Camera mainCam;
     public Transform transformObj;
     public EnemyTurret spawner;
     public int damage = 1;

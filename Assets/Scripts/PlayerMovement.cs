@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     public int HP = 10;
     public int money = 0;
     public bool alive = true;
+    public int round = 1;
     public WeaponManager weaponManager;
+    public static PlayerMovement instance;
     private void Awake()
     {
         //busca el gameobject con el tag weaponmanager
@@ -79,5 +81,16 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     {
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        //singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        //dontdestroyonload
+        DontDestroyOnLoad(gameObject);
     }
 }

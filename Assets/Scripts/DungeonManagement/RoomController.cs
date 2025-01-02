@@ -14,11 +14,11 @@ public class RoomInfo
 public class RoomController : MonoBehaviour
 {
     public static RoomController instance;
-    string currentWorldName = "Level1";
-    RoomInfo currentLoadRoomData;
-    Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
+    public string currentWorldName = "Level1";
+    public RoomInfo currentLoadRoomData;
+    public Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
     public List<Room> loadedRooms = new List<Room>();
-    bool isLoadingRoom = false;
+    public bool isLoadingRoom = false;
     public Room currRoom;
     public bool spawnedBossRoom = false;
     public bool updatedRooms = false;
@@ -26,14 +26,6 @@ public class RoomController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-    private void Start()
-    {
-        /*LoadRoom("Start", 0, 0);
-        LoadRoom("Empty", 1, 0);
-        LoadRoom("Empty", -1, 0);
-        LoadRoom("Empty", 0, 1);
-        LoadRoom("Empty", 0, -1);*/
     }
     private void Update()
     {

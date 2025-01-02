@@ -9,10 +9,13 @@ public class EnemyTurret : AEnemyBehaviour
     public Transform bulletTransform;
     public Stack<GameObject> bullets;
     public Enemy_DoorScript _enemyDoorScript;
+    public PlayerMovement Player;
 
     private void Awake()
     {
         bullets = new Stack<GameObject>();
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        HP = 3 + Player.round;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +47,7 @@ public class EnemyTurret : AEnemyBehaviour
             GoToState<DieState>();
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().money += 1;
+            Player.money += 1;
         }
     }
     private void Update()
@@ -61,6 +64,7 @@ public class EnemyTurret : AEnemyBehaviour
         {
             bullet = Instantiate(bulletPrefab, bulletTransform.position, Quaternion.identity);
             bullet.GetComponent<EnemyBullet>().FindShooter(gameObject);
+            bullet.GetComponent<EnemyBullet>().damage = 1+Player.round/4;
         }
     }
     public void Push(GameObject obj)

@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 671525793}
   m_Layer: 0
   m_Name: RoomController
-  m_TagString: Untagged
+  m_TagString: RoomController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,7 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf801bdda5c9b3049bc44b21eaf1a350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWorldName: Level1
   loadedRooms: []
+  isLoadingRoom: 0
   currRoom: {fileID: 0}
   spawnedBossRoom: 0
   updatedRooms: 0
@@ -517,6 +519,7 @@ MonoBehaviour:
   HP: 10
   money: 0
   alive: 1
+  round: 0
   weaponManager: {fileID: 0}
 --- !u!50 &971225242
 Rigidbody2D:

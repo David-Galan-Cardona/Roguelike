@@ -9,6 +9,7 @@ TagManager:
   - EnemyDamager
   - WeaponManager
   - Wall
+  - RoomController
   layers:
   - Default
   - TransparentFX

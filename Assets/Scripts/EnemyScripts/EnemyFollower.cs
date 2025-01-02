@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyFollow : AEnemyBehaviour
 {
-    private ChaseBehaviour _chaseB;
-    public int damage = 1;
+    public int damage;
     private Enemy_DoorScript _enemyDoorScript;
+    public PlayerMovement Player;
     private void Start()
     {
-        
+        //busca player
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        damage = 1 + Player.round/2;
+        HP = 2 + Player.round*1.3f;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -63,7 +66,7 @@ public class EnemyFollow : AEnemyBehaviour
             _animator.SetBool("Boom", true);
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().money += 1;
+            Player.money += 1;
         }
     }
     private void Update()
