@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     [SerializeField] private float speed = 3f;
     private Rigidbody2D playerRB;
     private Vector2 moveInput;
-    private Animator playerAnimator;
+    public Animator playerAnimator;
     private Inputs _i;
     public int HP = 10;
     public int money = 0;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     public int round = 1;
     public WeaponManager weaponManager;
     public static PlayerMovement instance;
+    public Canvas deathMenu;
     private void Awake()
     {
         //busca el gameobject con el tag weaponmanager
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
             {
                 Destroy(weaponManager.activeParticleSistem.gameObject);
             }
+            deathMenu.GetComponent<Canvas>().enabled = true;
         }
     }
 

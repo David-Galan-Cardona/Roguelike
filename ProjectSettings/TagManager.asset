@@ -10,6 +10,7 @@ TagManager:
   - WeaponManager
   - Wall
   - RoomController
+  - Menu
   layers:
   - Default
   - TransparentFX
