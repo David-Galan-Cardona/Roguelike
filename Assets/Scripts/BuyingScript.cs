@@ -38,6 +38,18 @@ public class BuyingScript : MonoBehaviour
                 Player.GetComponent<PlayerMovement>().money -= Price;
                 WeaponLevel++;
                 Player.GetComponentInChildren<WeaponManager>().GetType().GetField(WeaponLevelName).SetValue(Player.GetComponentInChildren<WeaponManager>(), WeaponLevel);
+                if (WeaponLevelName == "flamethrowerLevel")
+                {
+                    Player.GetComponent <PlayerMovement>().UpdateHud(false, true);
+                }
+                else if (WeaponLevelName == "orbLevel")
+                {
+                    Player.GetComponent<PlayerMovement>().UpdateHud(true, false);
+                }
+                else
+                {
+                    Player.GetComponent<PlayerMovement>().UpdateHud(false, false);
+                }
                 UpdatePrice();
             }
         }

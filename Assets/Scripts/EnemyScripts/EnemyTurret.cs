@@ -37,6 +37,8 @@ public class EnemyTurret : AEnemyBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerMovement>().HP -= 1;
+            collision.gameObject.GetComponent<PlayerMovement>().CheckIfAlive();
+            Player.UpdateHud(false, false);
         }
     }
 
@@ -48,6 +50,7 @@ public class EnemyTurret : AEnemyBehaviour
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
             Player.money += 1;
+            Player.UpdateHud(false, false);
         }
     }
     private void Update()

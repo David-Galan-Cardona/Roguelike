@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
 {
@@ -18,6 +20,14 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     public WeaponManager weaponManager;
     public static PlayerMovement instance;
     public Canvas deathMenu;
+
+    //Hud
+    public TextMeshProUGUI HPHUD;
+    public TextMeshProUGUI MoneyHUD;
+    public TextMeshProUGUI RoundHUD;
+    public Image SwordHUD;
+    public Image OrbHUD;
+    public Image FlamethrowerHUD;
     private void Awake()
     {
         //busca el gameobject con el tag weaponmanager
@@ -61,6 +71,7 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     }
     public void CheckIfAlive()
     {
+        HPHUD.text = HP.ToString();
         if (HP <= 0)
         {
             playerAnimator.SetBool("IsDying", true);
@@ -81,6 +92,11 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
 
     void Start()
     {
+        HPHUD.text = "10";
+        MoneyHUD.text = "0";
+        RoundHUD.text = "LVL 0";
+        OrbHUD.enabled = false;
+        FlamethrowerHUD.enabled = false;
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         //singleton
@@ -94,5 +110,20 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
         }
         //dontdestroyonload
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void UpdateHud(bool orb, bool fire)
+    {
+        RoundHUD.text = ("LVL" + round.ToString());
+        HPHUD.text = HP.ToString();
+        MoneyHUD.text = money.ToString();
+        if (orb == true)
+        {
+            OrbHUD.enabled = true;
+        }
+        if (fire == true)
+        {
+            FlamethrowerHUD.enabled = true;
+        }
     }
 }

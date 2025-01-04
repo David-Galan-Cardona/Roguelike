@@ -25,6 +25,7 @@ public class Buyinghealth : MonoBehaviour
             {
                 Player.money -= Price;
                 Player.HP += 1;
+                Player.UpdateHud(false, false);
             }
         }
     }

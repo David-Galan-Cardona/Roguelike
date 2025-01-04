@@ -43,6 +43,7 @@ public class EnemyFollow : AEnemyBehaviour
             //get enemydoorscript and call enemydefeated
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
+            Player.UpdateHud(false, false);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -67,6 +68,7 @@ public class EnemyFollow : AEnemyBehaviour
             _enemyDoorScript = GetComponent<Enemy_DoorScript>();
             _enemyDoorScript.EnemyDefeated();
             Player.money += 1;
+            Player.UpdateHud(false, false);
         }
     }
     private void Update()

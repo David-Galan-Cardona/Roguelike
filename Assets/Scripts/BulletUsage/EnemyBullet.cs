@@ -42,6 +42,7 @@ public class EnemyBullet : ABullet
                 collision.gameObject.GetComponent<PlayerMovement>().HP -= damage;
                 spawner.Push(gameObject);
                 collision.gameObject.GetComponent<PlayerMovement>().CheckIfAlive();
+                collision.gameObject.GetComponent<PlayerMovement>().UpdateHud(false, false);
             }
             else
             {

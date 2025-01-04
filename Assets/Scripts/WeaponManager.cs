@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
 {
@@ -34,6 +35,12 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
     public static WeaponManager instance;
     public Stack<GameObject> bullets;
     public GameObject spawnPoint;
+    //Hud
+    public Image SwordHUD;
+    public Image OrbHUD;
+    public Image FlamethrowerHUD;
+    public Sprite Selected;
+    public Sprite Unselected;
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -168,6 +175,9 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
             Weapon.GetComponent<SpriteRenderer>().sprite = Espada;
             weaponAnimator = Weapon.GetComponent<Animator>();
             weaponAnimator.SetInteger("WeaponAnimated", 1);
+            SwordHUD.sprite = Selected;
+            OrbHUD.sprite = Unselected;
+            FlamethrowerHUD.sprite = Unselected;
         }
         timeBetweenShots = 1;
             
@@ -189,6 +199,9 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
                 weaponHolded = 2;
                 Weapon.GetComponent<SpriteRenderer>().sprite = Orbe;
                 weaponAnimator.SetInteger("WeaponAnimated", 2);
+                SwordHUD.sprite = Unselected;
+                OrbHUD.sprite = Selected;
+                FlamethrowerHUD.sprite = Unselected;
             }
             timeBetweenShots = 0.5f;
         }
@@ -203,6 +216,9 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
                 weaponHolded = 3;
                 Weapon.GetComponent<SpriteRenderer>().sprite = OrbeFuego;
                 weaponAnimator.SetInteger("WeaponAnimated", 3);
+                SwordHUD.sprite = Unselected;
+                OrbHUD.sprite = Unselected;
+                FlamethrowerHUD.sprite = Selected;
             }
         }
     }
@@ -217,6 +233,9 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
                 weaponHolded = 3;
                 Weapon.GetComponent<SpriteRenderer>().sprite = OrbeFuego;
                 weaponAnimator.SetInteger("WeaponAnimated", 3);
+                SwordHUD.sprite = Unselected;
+                OrbHUD.sprite = Unselected;
+                FlamethrowerHUD.sprite = Selected;
             }
         }
         /*if (weaponHolded == 3)

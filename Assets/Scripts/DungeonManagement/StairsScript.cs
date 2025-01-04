@@ -15,9 +15,9 @@ public class StairsScript : MonoBehaviour
         {
             Player.transform.position = new Vector3(0, 0, 0);
             Player.GetComponent<PlayerMovement>().round++;
+            Player.GetComponent<PlayerMovement>().UpdateHud(false, false);
             //reload the SampleScene
             UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
-            
         }
     }
 }
