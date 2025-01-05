@@ -12,17 +12,21 @@ public class MenuScripts : MonoBehaviour
     public Canvas deathMenu;
     public Canvas pauseMenu;
     public Canvas pauseButton;
+    public bool GameStartMenu = false;
 
     public void Start()
     {
-        instance = GameObject.FindGameObjectWithTag("Menu");
-        if (instance != this.gameObject)
+        if (!GameStartMenu)
         {
-            Destroy(this.gameObject);
+            instance = GameObject.FindGameObjectWithTag("Menu");
+            if (instance != this.gameObject)
+            {
+                Destroy(this.gameObject);
+            }
+            DontDestroyOnLoad(gameObject);
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            WeaponManager = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<WeaponManager>();
         }
-        DontDestroyOnLoad(gameObject);
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        WeaponManager = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<WeaponManager>();
     }
     public void Restart()
     {
@@ -35,8 +39,11 @@ public class MenuScripts : MonoBehaviour
         Player.alive = true;
         Player.round = 0;
         Player.playerAnimator.SetBool("IsDying", false);
-        //reload scene
+        Player.GetComponentInChildren<WeaponManager>().ResetWeapon();
         SceneManager.LoadScene("SampleScene");
+        Player.OrbHUD.enabled = false;
+        Player.FlamethrowerHUD.enabled = false;
+        Player.UpdateHud(false, false);
         deathMenu.GetComponent<Canvas>().enabled = false;
         pauseMenu.GetComponent<Canvas>().enabled = false;
         pauseButton.GetComponent<Canvas>().enabled = true;
@@ -57,5 +64,9 @@ public class MenuScripts : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.GetComponent<Canvas>().enabled = false;
         pauseButton.GetComponent<Canvas>().enabled = true;
+    }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }

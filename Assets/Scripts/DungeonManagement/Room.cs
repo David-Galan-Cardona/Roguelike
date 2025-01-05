@@ -12,7 +12,6 @@ public class Room : MonoBehaviour
     public bool hasBeenCleared = false;
     [SerializeField]
     public List<GameObject> enemies = new List<GameObject>();
-    //public bool isStartRoom = false;
     private Enemy_DoorScript Enemy_DoorScript;
 
     public Room(int x, int y)
@@ -76,7 +75,6 @@ public class Room : MonoBehaviour
                 case Door.DoorType.right:
                     if (getRight() == null)
                     {
-                        //door.gameObject.SetActive(false);
                         door.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         door.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     }
@@ -84,7 +82,6 @@ public class Room : MonoBehaviour
                 case Door.DoorType.left:
                     if (getLeft() == null)
                     {
-                        //door.gameObject.SetActive(false);
                         door.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         door.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     }
@@ -92,7 +89,6 @@ public class Room : MonoBehaviour
                 case Door.DoorType.top:
                     if (getTop() == null)
                     {
-                        //door.gameObject.SetActive(false);
                         door.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         door.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     }
@@ -100,7 +96,6 @@ public class Room : MonoBehaviour
                 case Door.DoorType.bottom:
                     if (getBottom() == null)
                     {
-                        //door.gameObject.SetActive(false);
                         door.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         door.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     }
@@ -163,14 +158,12 @@ public class Room : MonoBehaviour
             if (hasBeenCleared == false)
             {
                 hasBeenCleared = true;
-                //pon el collider de las Doors en true
                 foreach (Door door in doors)
                 {
                     door.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 }
                 foreach (GameObject enemy in enemies)
                 {
-                    //pon el collider de los hijos de los enemigos en true
                     foreach (Collider2D collider in enemy.GetComponentsInChildren<Collider2D>())
                     {
                         collider.enabled = true;

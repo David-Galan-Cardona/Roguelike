@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     public Image FlamethrowerHUD;
     private void Awake()
     {
-        //busca el gameobject con el tag weaponmanager
         weaponManager = GameObject.FindGameObjectWithTag("WeaponManager").GetComponent<WeaponManager>();
         _i = new Inputs();
         _i.Player.SetCallbacks(this);
@@ -72,6 +71,7 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
     public void CheckIfAlive()
     {
         HPHUD.text = HP.ToString();
+        gameObject.GetComponent<AudioManager>().PlaySFX(gameObject.GetComponent<AudioManager>().playerDamage);
         if (HP <= 0)
         {
             playerAnimator.SetBool("IsDying", true);
@@ -84,7 +84,6 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
         }
     }
 
-    //espera a que la animacion de muerte termine para poner isdyin en false
     public void Die()
     {
         playerAnimator.SetBool("IsDying", false);
@@ -99,7 +98,6 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
         FlamethrowerHUD.enabled = false;
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        //singleton
         if (instance == null)
         {
             instance = this;
@@ -108,7 +106,6 @@ public class PlayerMovement : MonoBehaviour, Inputs.IPlayerActions
         {
             Destroy(gameObject);
         }
-        //dontdestroyonload
         DontDestroyOnLoad(gameObject);
     }
 

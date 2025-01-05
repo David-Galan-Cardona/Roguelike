@@ -44,6 +44,7 @@ public class EnemyTurret : AEnemyBehaviour
 
     public void CheckIfAlife()
     {
+        Player.GetComponent<AudioManager>().PlaySFX(Player.GetComponent<AudioManager>().enemyDamage);
         if (HP < 1)
         {
             GoToState<DieState>();

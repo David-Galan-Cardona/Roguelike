@@ -183,6 +183,28 @@ public class WeaponManager : MonoBehaviour, Inputs.IWeaponActions
             
     }
 
+    public void ResetWeapon()
+    {
+        if (weaponHolded == 3)
+        {
+            if (activeParticleSistem != null)
+            {
+                Destroy(activeParticleSistem);
+            }
+        }
+        if (weaponHolded != 1)
+        {
+            weaponHolded = 1;
+            Weapon.GetComponent<SpriteRenderer>().sprite = Espada;
+            weaponAnimator = Weapon.GetComponent<Animator>();
+            weaponAnimator.SetInteger("WeaponAnimated", 1);
+            SwordHUD.sprite = Selected;
+            OrbHUD.sprite = Unselected;
+            FlamethrowerHUD.sprite = Unselected;
+        }
+        timeBetweenShots = 1;
+    }
+
     public void OnSwitchWeapon2(InputAction.CallbackContext context)
     {
         if (orbLevel != 0)
