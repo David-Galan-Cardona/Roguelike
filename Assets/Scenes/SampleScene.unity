@@ -857,6 +857,7 @@ MonoBehaviour:
   deathMenu: {fileID: 1101510660}
   pauseMenu: {fileID: 395504097}
   pauseButton: {fileID: 357370386}
+  GameStartMenu: 0
 --- !u!1 &395504094
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +927,7 @@ Canvas:
   m_GameObject: {fileID: 395504094}
   m_Enabled: 0
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -981,6 +982,7 @@ MonoBehaviour:
   deathMenu: {fileID: 1101510660}
   pauseMenu: {fileID: 395504097}
   pauseButton: {fileID: 357370386}
+  GameStartMenu: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,11 +1187,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 395504098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 79}
-  m_SizeDelta: {x: 30, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 4, y: -4}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &768386657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,8 +1370,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1454,8 +1456,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 25}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -1.6285, y: 55.7311}
+  m_SizeDelta: {x: 350.8163, y: 65.7781}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832094352
 MonoBehaviour:
@@ -1949,7 +1951,6 @@ MonoBehaviour:
   alive: 1
   round: 0
   weaponManager: {fileID: 0}
-  audioManager: {fileID: 0}
   deathMenu: {fileID: 1101510660}
   HPHUD: {fileID: 1454799063}
   MoneyHUD: {fileID: 1680431318}
@@ -2383,6 +2384,7 @@ MonoBehaviour:
   deathMenu: {fileID: 1101510660}
   pauseMenu: {fileID: 395504097}
   pauseButton: {fileID: 357370386}
+  GameStartMenu: 0
 --- !u!1 &1199063832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,8 +2812,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2969,8 +2971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 225}
+  m_AnchoredPosition: {x: -1.6285, y: 0.916}
+  m_SizeDelta: {x: 877.0411, y: 493.3357}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1434576026
 MonoBehaviour:
@@ -4094,8 +4096,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -39.162292}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -1.6285, y: -84.9513}
+  m_SizeDelta: {x: 350.8163, y: 65.7781}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028370804
 MonoBehaviour:
