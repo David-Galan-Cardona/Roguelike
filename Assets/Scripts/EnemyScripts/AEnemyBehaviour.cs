@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.LowLevel;
 public abstract class AEnemyBehaviour : MonoBehaviour
 {
     public float HP;
+    public float MaxHP;
     public float speed;
     public StatesSO CurrentState;
     public GameObject target;

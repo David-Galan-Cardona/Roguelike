@@ -7,12 +7,27 @@ public class EnemyFollow : AEnemyBehaviour
     public int damage;
     private Enemy_DoorScript _enemyDoorScript;
     public PlayerMovement Player;
+    public GameObject HPBar;
+    public float percentageHP = 100;
+    public float HPBarScale = 0.5f;
+    public float CurrentHPBarScale;
+
+    private void HPBarUpdate()
+    {
+        percentageHP = HP * 100 / MaxHP;
+        CurrentHPBarScale = HPBarScale * percentageHP / 100;
+        HPBar.transform.localScale = new Vector3(CurrentHPBarScale, HPBar.transform.localScale.y, HPBar.transform.localScale.z);
+    }
     private void Start()
     {
         //busca player
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         damage = 1 + Player.round/2;
-        HP = 2 + Player.round*1.3f;
+        MaxHP = 2 + Player.round*1.3f;
+        HP = MaxHP;
+        //busca tag hpbar
+        HPBar = transform.Find("HPBar").gameObject;
+        HPBarUpdate();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -61,6 +76,7 @@ public class EnemyFollow : AEnemyBehaviour
     public void CheckIfAlife()
     {
         Player.GetComponent<AudioManager>().PlaySFX(Player.GetComponent<AudioManager>().enemyDamage);
+        HPBarUpdate();
         if (HP < 1)
         {
             GoToState<DieState>();
